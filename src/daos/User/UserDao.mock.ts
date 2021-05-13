@@ -3,6 +3,8 @@ import { getRandomInt } from '@shared/functions';
 import { IUserDao } from './UserDao';
 import MockDaoMock from '../MockDb/MockDao.mock';
 import * as bcrypt from "bcrypt";
+const dbLoginFilePath = 'src/daos/MockDb/MockDb.json';
+const dbUsersFilePath = 'src/daos/MockDb/MockDb.backup.json';
 
 
 
@@ -10,7 +12,7 @@ class UserDao extends MockDaoMock implements IUserDao {
 
 
     public async getOne(email: string): Promise<IUser | null> {
-        const db = await super.openDb();
+        const db = await super.openDb(dbLoginFilePath);
         for (const user of db.users) {
             if (user.email === email) {
                 return user;
@@ -20,50 +22,28 @@ class UserDao extends MockDaoMock implements IUserDao {
     }
 
 
-    public async getAll(): Promise<IUser[]> {
-        const db = await super.openDb();
-        return db.users;
-    }
-
-
-    public async add(user: IUser): Promise<void> {
-        const db = await super.openDb();
+    public async addLogin(user: IUser): Promise<void> {
+        const db = await super.openDb(dbLoginFilePath);
         user.id = getRandomInt();
-        user.pwdHash = await bcrypt.hash(user.pwdHash, 10)
-
+        // user.pwdHash = await bcrypt.hash(user.pwdHash, 10)
+        const passwordHash = await bcrypt.hash(user.pwdHash, 10);
+        user.pwdHash = passwordHash;
         // Store hash in your password DB.
         console.log("user: ", user)
         db.users.push(user);
-        return
-        await super.saveDb(db);
+        await super.saveDb(dbLoginFilePath, db);
         return;
     }
 
-
-    public async update(user: IUser): Promise<void> {
-        const db = await super.openDb();
-        for (let i = 0; i < db.users.length; i++) {
-            if (db.users[i].id === user.id) {
-                db.users[i] = user;
-                await super.saveDb(db);
-                return;
-            }
-        }
-        throw new Error('User not found');
+    public async addUser(user: any): Promise<void> {
+        const db = await super.openDb(dbUsersFilePath);
+        user.id = getRandomInt();
+        console.log("user: ", user)
+        db.users.push(user);
+        await super.saveDb(dbUsersFilePath, db);
+        return;
     }
 
-
-    public async delete(id: number): Promise<void> {
-        const db = await super.openDb();
-        for (let i = 0; i < db.users.length; i++) {
-            if (db.users[i].id === id) {
-                db.users.splice(i, 1);
-                await super.saveDb(db);
-                return;
-            }
-        }
-        throw new Error('User not found');
-    }
 }
 
 export default UserDao;

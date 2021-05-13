@@ -27,7 +27,6 @@ router.post('/login', async (req: IRequest, res: Response) => {
     }
     // Fetch user
     const user = await userDao.getOne(email);
-    const users = await userDao.getAll();
     if (!user) {
         return res.status(UNAUTHORIZED).json({
             error: loginFailedErr,
@@ -43,12 +42,13 @@ router.post('/login', async (req: IRequest, res: Response) => {
     // Setup Admin Cookie
     const jwt = await jwtService.getJwt({
         id: user.id,
-        role: user.role,
+        role: user.role
     });
+
     const { key, options } = cookieProps;
     res.cookie(key, jwt, options);
     // Return
-    return res.status(OK).end();
+    return res.status(OK).json(cookieProps)
 });
 
 

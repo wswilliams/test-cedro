@@ -15,7 +15,7 @@ const { UNAUTHORIZED } = StatusCodes;
 export const adminMW = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Get json-web-token
-        const jwt = req.signedCookies[cookieProps.key];
+        const jwt = req.signedCookies[cookieProps.key] || req.headers.authorization;
         if (!jwt) {
             throw Error('JWT not present in signed cookie.');
         }

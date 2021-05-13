@@ -3,69 +3,42 @@ import { Request, Response, Router } from 'express';
 
 import UserDao from '@daos/User/UserDao.mock';
 import { paramMissingError, IRequest } from '@shared/constants';
+import { adminMW } from "./middleware";
 
 const router = Router();
+router.use(adminMW);
 const userDao = new UserDao();
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
-
-
-
-/******************************************************************************
- *                      Get All Users - "GET /api/users/all"
- ******************************************************************************/
-
-router.get('/all', async (req: Request, res: Response) => {
-    const users = await userDao.getAll();
-    return res.status(OK).json({users});
-});
-
-
 
 /******************************************************************************
  *                       Add One - "POST /api/users/add"
  ******************************************************************************/
 
-router.post('/add', async (req: IRequest, res: Response) => {
+router.post('/add-user-system', async (req: IRequest, res: Response) => {
     const { user } = req.body;
     if (!user) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
         });
     }
-    await userDao.add(user);
+    await userDao.addLogin(user);
     return res.status(CREATED).end();
 });
 
-
-
 /******************************************************************************
- *                       Update - "PUT /api/users/update"
+ *                       Add One - "POST /api/users/add"
  ******************************************************************************/
 
-router.put('/update', async (req: IRequest, res: Response) => {
+router.post('/add-user', async (req: IRequest, res: Response) => {
     const { user } = req.body;
     if (!user) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
         });
     }
-    user.id = Number(user.id);
-    await userDao.update(user);
-    return res.status(OK).end();
+    const register = await userDao.addUser(user);
+    return res.status(CREATED).json(register);
 });
-
-
-
-/******************************************************************************
- *                    Delete - "DELETE /api/users/delete/:id"
- ******************************************************************************/
-
-router.delete('/delete/:id', async (req: IRequest, res: Response) => {
-    const { id } = req.params;
-    await userDao.delete(Number(id));
-    return res.status(OK).end();
-});
-
 
 
 /******************************************************************************

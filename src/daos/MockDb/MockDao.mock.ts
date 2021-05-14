@@ -21,7 +21,8 @@ class MockDaoMock {
     }
 
     protected saveFile(dbFilePath: any): Promise<void> {
-        return fs.writeFileSync(`temp/users.txt`, dbFilePath);
+        console.log(dbFilePath);
+        return fs.writeFileSync(`tmp/users.txt`, dbFilePath);
     }
 }
 

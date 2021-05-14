@@ -25,7 +25,7 @@ npm install
 
 ### Run project
 ```
-npm start
+npm rum start:dev
 ```
 
 ### Executar aplicação com Docker

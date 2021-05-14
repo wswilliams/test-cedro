@@ -11,8 +11,7 @@ import BaseRouter from './routes';
 import logger from '@shared/Logger';
 import { cookieProps } from '@shared/constants';
 import swaggerUi from 'swagger-ui-express';
-// import * as documentSwagger from 'src/daos/MockDb/swagger.json';
-// const documentSwagger = 'src/daos/MockDb/swagger.json';
+import { default as documentSwagger } from "src/daos/MockDb/swagger.json";
 
 const app = express();
 const { BAD_REQUEST } = StatusCodes;
@@ -38,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(helmet());
 }
 
-// app.use(`${contextPath}/swagger`, swaggerUi.serve, swaggerUi.setup(documentSwagger));
+app.use(`${contextPath}/swagger`, swaggerUi.serve, swaggerUi.setup(documentSwagger));
 // Add APIs
 app.use(contextPath, BaseRouter);
 

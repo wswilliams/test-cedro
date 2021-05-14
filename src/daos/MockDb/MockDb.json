@@ -27,17 +27,6 @@
             "pwdHash": "$2b$10$aiEAh9JsbOE.mOYM0Bfonu6YUal9Sbiaq25T08SSpG82/PbJPWGLm",
             "role": 1,
             "id": 130892330060
-        },
-        {
-            "name": "Gordan Freeman11",
-            "email": "gordan1.freeman@gmail.com",
-            "role": 1,
-            "pwdHash": "$2b$10$fAt4zKIGS/qCPAZNzfvU7em0ht93zfL/ISc51ETXzoNIvzmJOMEnq",
-            "id": 461690819033,
-            "nome_completo": "",
-            "data_de_nascimento": "",
-            "cpf": "",
-            "rg": ""
         }
     ]
 }

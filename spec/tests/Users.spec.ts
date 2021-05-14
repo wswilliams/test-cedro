@@ -18,6 +18,7 @@ describe('UserRouter', () => {
 
     const usersPath = '/api/users';
     const addUsersPath = `${usersPath}/add-user`;
+    const addUsersFile = `${usersPath}/add-user-system`;
 
     let agent: SuperTest<Test>;
     let jwtCookie: string;
@@ -32,19 +33,18 @@ describe('UserRouter', () => {
     });
 
 
-    describe(`"POST:${addUsersPath}"`, () => {
+    describe(`"POST:${addUsersFile}"`, () => {
 
         const callApi = (reqBody: IReqBody) => {
-            return agent.post(addUsersPath).set('Cookie', jwtCookie).type('form').send(reqBody);
+            return agent.post(addUsersFile).set('Cookie', jwtCookie).type('form').send(reqBody);
         };
 
         const userData = {
-            user: new User('Gordan Freeman', 'gordan.freeman@gmail.com'),
+            user: new User('Gordan Freeman11', 'gordan1.freeman@gmail.com', 1, '123456'),
         };
 
-
         it(`should return a status code of "${CREATED}" if the request was successful.`, (done) => {
-            spyOn(UserDao.prototype, 'addUser').and.returnValue(Promise.resolve());
+            spyOn(UserDao.prototype, 'addFile').and.returnValue(Promise.resolve());
             callApi(userData)
                 .end((err: Error, res: IResponse) => {
                     pErr(err);
@@ -65,21 +65,42 @@ describe('UserRouter', () => {
                     done();
                 });
         });
-
-
-        it(`should return a JSON object with an error message and a status code of "${BAD_REQUEST}"
-            if the request was unsuccessful.`, (done) => {
-            // Setup Dummy IResponse
-            const errMsg = 'Could not add user.';
-            spyOn(UserDao.prototype, 'addUser').and.throwError(errMsg);
-            // Call API
-            callApi(userData)
-                .end((err: Error, res: IResponse) => {
-                    pErr(err);
-                    expect(res.status).toBe(BAD_REQUEST);
-                    expect(res.body.error).toBe(errMsg);
-                    done();
-                });
-        });
     });
+
+    // describe(`"POST:${addUsersPath}"`, () => {
+
+    //     const callApi = (reqBody: IReqBody) => {
+    //         return agent.post(addUsersPath).set('Cookie', jwtCookie).type('form').send(reqBody);
+    //     };
+
+    //     const userData = {
+    //         user: new User('Gordan Freeman', 'gordan.freeman@gmail.com', 1, 'pwdHash', 0,
+    //             'Admim souza', '20021-05-17', '999999999', '88888888'
+    //         ),
+    //     };
+
+
+    //     it(`should return a status code of "${CREATED}" if the request was successful.`, (done) => {
+    //         spyOn(UserDao.prototype, 'addLogin').and.returnValue(Promise.resolve());
+    //         callApi(userData)
+    //             .end((err: Error, res: IResponse) => {
+    //                 pErr(err);
+    //                 expect(res.status).toBe(CREATED);
+    //                 expect(res.body.error).toBeUndefined();
+    //                 done();
+    //             });
+    //     });
+
+
+    //     it(`should return a JSON object with an error message of "${paramMissingError}" and a status
+    //         code of "${BAD_REQUEST}" if the user param was missing.`, (done) => {
+    //         callApi({})
+    //             .end((err: Error, res: IResponse) => {
+    //                 pErr(err);
+    //                 expect(res.status).toBe(BAD_REQUEST);
+    //                 expect(res.body.error).toBe(paramMissingError);
+    //                 done();
+    //             });
+    //     });
+    // });
 });

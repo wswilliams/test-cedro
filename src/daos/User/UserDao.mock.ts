@@ -28,9 +28,17 @@ class UserDao extends MockDaoMock implements IUserDao {
         return null;
     }
 
+    public async addFile(user: IUser): Promise<void> {
 
-    public async addLogin(user: IUser): Promise<void> {
+        const userLogado = await this.getOneId(user.id);
+        await super.saveFile(user, userLogado);
+        return;
+    }
 
+    public async addUser(user: IUser): Promise<void> {
+
+        console.log("------addUser------")
+        console.log(user)
         const db = await super.openDb(dbLoginFilePath);
         user.id = getRandomInt();
         const passwordHash = await bcrypt.hashSync(user.pwdHash, 0);
@@ -39,13 +47,6 @@ class UserDao extends MockDaoMock implements IUserDao {
         db.users.push(user);
 
         await super.saveDb(dbLoginFilePath, db);
-        return;
-    }
-
-    public async addUser(user: any, id: any): Promise<void> {
-
-        const userLogado = await this.getOneId(id);
-        await super.saveFile(user, userLogado);
         return;
     }
 

@@ -21,7 +21,7 @@ class MockDaoMock {
         return jsonfile.writeFile(dbFilePath, db);
     }
 
-    protected saveFile(dbFilePath: any, user: any): Promise<void> {
+    protected saveFile(dbFilePath: IUser, user: any): Promise<void> {
 
         const filename = `users-${getRandomInt()}.txt`;
 
@@ -29,16 +29,21 @@ class MockDaoMock {
 
         let data = "Dados do Usuário Registrado\n";
 
+        delete user.id;
+
         data += JSON.stringify(dbFilePath) + "\n";
 
         const authenticatedUser = {
-            usuario_altenticado: user.nome,
+            usuario_altenticado: user.name,
             login: user.email,
             ip: ip.address()
         }
         data += "Dados do Usuário Logado\n";
 
         data += JSON.stringify(authenticatedUser);
+
+        console.log("----------data-------")
+        console.log(data)
 
         return fs.writeFileSync(dir, data);
     }

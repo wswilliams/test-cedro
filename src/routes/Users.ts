@@ -25,7 +25,7 @@ router.post('/add-user-system', async (req: IRequest, res: Response) => {
             error: paramMissingError,
         });
     }
-    await userDao.addLogin(user);
+    await userDao.addUser(user);
     return res.status(CREATED).json({ mensage: "Usuário criado com sucesso" });
 });
 
@@ -43,8 +43,8 @@ router.post('/add-user', async (req: Request, res: Response) => {
     }
     const jwt = req.signedCookies[cookieProps.key]
     const clientData = await jwtService.decodeJwt(jwt);
-
-    await userDao.addUser(user, clientData.id);
+    user.id = clientData.id;
+    await userDao.addFile(user);
     return res.status(CREATED).json({ mensage: "Arquivo criado com sucesso" });
 });
 

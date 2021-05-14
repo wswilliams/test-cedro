@@ -11,7 +11,7 @@
     },
     "servers": [],
     "paths": {
-        "/api/login": {
+        "/api/auth/login": {
             "post": {
                 "summary": "realizar login",
                 "requestBody": {
@@ -41,16 +41,16 @@
                 }
             }
         },
-        "/api/forgot-password": {
+        "/api/users/add-user-system": {
             "post": {
-                "summary": "recuperação de senha",
+                "summary": "adicionar novo usuário no sistema",
                 "requestBody": {
-                    "description": "objeto recupreção de senha",
+                    "description": "objeto adicionar novo usuário no sistema",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/definitions/forgot-password"
+                                "$ref": "#/definitions/add-user-system"
                             }
                         }
                     }
@@ -71,76 +71,16 @@
                 }
             }
         },
-        "/api/reset-password": {
+        "/api/users/add-user": {
             "post": {
-                "summary": "resetar senha",
+                "summary": "Gerar um arquivo com os dados passado pelo usuário",
                 "requestBody": {
-                    "description": "objeto resetar",
+                    "description": "objeto um arquivo com os dados passado pelo usuário",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/definitions/reset-password"
-                            }
-                        }
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/id"
-                        }
-                    },
-                    "400": {
-                        "description": "Failed. Bad post data."
-                    }
-                }
-            }
-        },
-        "/api/validate": {
-            "post": {
-                "summary": "validar código do vendedor",
-                "requestBody": {
-                    "description": "objeto vendedor",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/definitions/validate"
-                            }
-                        }
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/id"
-                        }
-                    },
-                    "400": {
-                        "description": "Failed. Bad post data."
-                    }
-                }
-            }
-        },
-        "/api/sync-user-vendas-balcao": {
-            "post": {
-                "summary": "sincronizar vendas-balcao",
-                "requestBody": {
-                    "description": "Sync Object",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/definitions/sync"
+                                "$ref": "#/definitions/add-user"
                             }
                         }
                     }
@@ -173,65 +113,43 @@
         "login": {
             "type": "object",
             "properties": {
-                "login": {
+                "email": {
                     "type": "string"
                 },
-                "senha": {
+                "password": {
                     "type": "string"
                 }
             }
         },
-        "forgot-password": {
+        "add-user-system": {
             "type": "object",
             "properties": {
-                "codigo": {
+                "name": {
                     "type": "string"
                 },
                 "email": {
                     "type": "string"
                 },
-                "host": {
+                "pwdHash": {
                     "type": "string"
                 }
             }
         },
-        "reset-password": {
+        "add-user": {
             "type": "object",
             "properties": {
-                "cod_cliente": {
-                    "type": "string"
-                },
-                "token": {
-                    "type": "string"
-                },
-                "senha": {
-                    "type": "string"
-                }
-            }
-        },
-        "validate": {
-            "type": "object",
-            "properties": {
-                "codigo": {
-                    "type": "string"
-                }
-            }
-        },
-        "sync": {
-            "type": "object",
-            "properties": {
-                "cod_cliente": {
-                    "type": "string"
-                }
-            }
-        },
-        "Cats": {
-            "type": "object",
-            "properties": {
-                "cats": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Cat"
+                "users": {
+                    "nome_completo": {
+                        "type": "string"
+                    },
+                    "data_de_nascimento": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "rg": {
+                        "type": "string"
                     }
                 }
             }

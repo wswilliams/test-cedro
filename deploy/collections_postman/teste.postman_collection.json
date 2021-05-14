@@ -66,7 +66,7 @@
 					"enabled": true
 				}
 			],
-			"url": "http://localhost:3000/api/users/add-user-system",
+			"url": "http://localhost:3000/api/users/add-user",
 			"folder": "15b670a2-feb2-3ea7-6f83-aa3feb6ee3b1",
 			"queryParams": [],
 			"preRequestScript": null,

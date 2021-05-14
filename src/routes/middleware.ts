@@ -15,12 +15,15 @@ const { UNAUTHORIZED } = StatusCodes;
 export const adminMW = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Get json-web-token
+        // req.signedCookies[cookieProps.key]
         const jwt = req.signedCookies[cookieProps.key] || req.headers.authorization;
+
         if (!jwt) {
             throw Error('JWT not present in signed cookie.');
         }
         // Make sure user role is an admin
         const clientData = await jwtService.decodeJwt(jwt);
+
         if (clientData.role === UserRoles.Admin) {
             res.locals.userId = clientData.id;
             next();

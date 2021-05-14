@@ -18,22 +18,34 @@ class UserDao extends MockDaoMock implements IUserDao {
         return null;
     }
 
+    public async getOneId(id: number): Promise<IUser | null> {
+        const db = await super.openDb(dbLoginFilePath);
+        for (const user of db.users) {
+            if (user.id === id) {
+                return user;
+            }
+        }
+        return null;
+    }
+
 
     public async addLogin(user: IUser): Promise<void> {
+
         const db = await super.openDb(dbLoginFilePath);
         user.id = getRandomInt();
-        const passwordHash = await bcrypt.hash("xa1a9j1q5t0h7p2", 10);
+        const passwordHash = await bcrypt.hashSync(user.pwdHash, 0);
         user.pwdHash = passwordHash;
-        console.log("user: ", user)
+        user.role = 1;
         db.users.push(user);
+
         await super.saveDb(dbLoginFilePath, db);
         return;
     }
 
-    public async addUser(user: any): Promise<void> {
- 
-        console.log("user: ", user)
-        await super.saveFile(user);
+    public async addUser(user: any, id: any): Promise<void> {
+
+        const userLogado = await this.getOneId(id);
+        await super.saveFile(user, userLogado);
         return;
     }
 

@@ -48,7 +48,7 @@ router.post('/login', async (req: IRequest, res: Response) => {
     const { key, options } = cookieProps;
     res.cookie(key, jwt, options);
     // Return
-    return res.status(OK).json(cookieProps)
+    return res.status(OK).json(jwt)
 });
 
 

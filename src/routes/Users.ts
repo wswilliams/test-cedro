@@ -4,6 +4,10 @@ import { Request, Response, Router } from 'express';
 import UserDao from '@daos/User/UserDao.mock';
 import { paramMissingError, IRequest } from '@shared/constants';
 import { adminMW } from "./middleware";
+import { cookieProps } from '@shared/constants';
+import { JwtService } from '@shared/JwtService';
+
+const jwtService = new JwtService();
 
 const router = Router();
 router.use(adminMW);
@@ -22,7 +26,7 @@ router.post('/add-user-system', async (req: IRequest, res: Response) => {
         });
     }
     await userDao.addLogin(user);
-    return res.status(CREATED).json({mensage: "Usuário criado com sucesso"});
+    return res.status(CREATED).json({ mensage: "Usuário criado com sucesso" });
 });
 
 /******************************************************************************
@@ -30,14 +34,18 @@ router.post('/add-user-system', async (req: IRequest, res: Response) => {
  ******************************************************************************/
 
 router.post('/add-user', async (req: Request, res: Response) => {
+
     const { user } = req.body;
     if (!user) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
         });
     }
-    await userDao.addUser(user);
-    return res.status(CREATED).json({mensage: "Arquivo criado com sucesso"});
+    const jwt = req.signedCookies[cookieProps.key]
+    const clientData = await jwtService.decodeJwt(jwt);
+
+    await userDao.addUser(user, clientData.id);
+    return res.status(CREATED).json({ mensage: "Arquivo criado com sucesso" });
 });
 
 

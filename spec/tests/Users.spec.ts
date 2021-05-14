@@ -44,7 +44,7 @@ describe('UserRouter', () => {
 
 
         it(`should return a status code of "${CREATED}" if the request was successful.`, (done) => {
-            spyOn(UserDao.prototype, 'add-user').and.returnValue(Promise.resolve());
+            spyOn(UserDao.prototype, 'addUser').and.returnValue(Promise.resolve());
             callApi(userData)
                 .end((err: Error, res: IResponse) => {
                     pErr(err);
@@ -71,7 +71,7 @@ describe('UserRouter', () => {
             if the request was unsuccessful.`, (done) => {
             // Setup Dummy IResponse
             const errMsg = 'Could not add user.';
-            spyOn(UserDao.prototype, 'add-user').and.throwError(errMsg);
+            spyOn(UserDao.prototype, 'addUser').and.throwError(errMsg);
             // Call API
             callApi(userData)
                 .end((err: Error, res: IResponse) => {

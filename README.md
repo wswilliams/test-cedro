@@ -37,3 +37,7 @@ Teste utilizando Postman ou Insomia
 
     Importe a coleção de:  deploy/collections_postman/teste.postman_collection.json
 
+Teste utilizando swagger
+    https://localhost:3000/api/swagger
+
+

@@ -1,5 +1,7 @@
 import jsonfile from 'jsonfile';
 import { IUser } from '@entities/User';
+import { getRandomInt } from '@shared/functions';
+const fs = require('fs');
 
 
 interface IDatabase {
@@ -14,9 +16,12 @@ class MockDaoMock {
         return jsonfile.readFile(dbFilePath) as Promise<IDatabase>;
     }
 
-
     protected saveDb(dbFilePath: string, db: IDatabase): Promise<void> {
         return jsonfile.writeFile(dbFilePath, db);
+    }
+
+    protected saveFile(dbFilePath: any): Promise<void> {
+        return fs.writeFileSync(`temp/users.txt`, dbFilePath);
     }
 }
 

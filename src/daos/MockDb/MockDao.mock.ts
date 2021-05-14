@@ -2,6 +2,7 @@ import jsonfile from 'jsonfile';
 import { IUser } from '@entities/User';
 import { getRandomInt } from '@shared/functions';
 const fs = require('fs');
+const ip = require('ip');
 
 
 interface IDatabase {
@@ -20,9 +21,26 @@ class MockDaoMock {
         return jsonfile.writeFile(dbFilePath, db);
     }
 
-    protected saveFile(dbFilePath: any): Promise<void> {
-        console.log(dbFilePath);
-        return fs.writeFileSync(`tmp/users.txt`, dbFilePath);
+    protected saveFile(dbFilePath: any, user: any): Promise<void> {
+
+        const filename = `users-${getRandomInt()}.txt`;
+
+        const dir: any = `tmp/${filename}`;
+
+        let data = "Dados do Usuário Registrado\n";
+
+        data += JSON.stringify(dbFilePath) + "\n";
+
+        const authenticatedUser = {
+            usuario_altenticado: user.nome,
+            login: user.email,
+            ip: ip.address()
+        }
+        data += "Dados do Usuário Logado\n";
+
+        data += JSON.stringify(authenticatedUser);
+
+        return fs.writeFileSync(dir, data);
     }
 }
 

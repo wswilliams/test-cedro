@@ -5,7 +5,7 @@ import { IUser } from '@entities/User';
 export interface IUserDao {
     getOne: (email: string) => Promise<IUser | null>;
     addLogin: (user: IUser) => Promise<void>;
-    addUser: (users: IUser) => Promise<void>;
+    addUser: (users: any, id: any) => Promise<void>;
 }
 
 class UserDao implements IUserDao {
@@ -34,7 +34,7 @@ class UserDao implements IUserDao {
      *
      * @param user
      */
-    public async addUser(user: IUser): Promise<void> {
+    public async addUser(user: any, id: any): Promise<void> {
         // TODO
         return Promise.resolve(undefined);
     }

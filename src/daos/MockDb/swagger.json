@@ -1,0 +1,240 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "TEST-CEDRO",
+        "description": "TESTE utilizando tecnologia NodeJS.",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "summary": "realizar login",
+                "requestBody": {
+                    "description": "login objeto",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/login"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/api/forgot-password": {
+            "post": {
+                "summary": "recuperação de senha",
+                "requestBody": {
+                    "description": "objeto recupreção de senha",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/forgot-password"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/api/reset-password": {
+            "post": {
+                "summary": "resetar senha",
+                "requestBody": {
+                    "description": "objeto resetar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/reset-password"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/api/validate": {
+            "post": {
+                "summary": "validar código do vendedor",
+                "requestBody": {
+                    "description": "objeto vendedor",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/validate"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/api/sync-user-vendas-balcao": {
+            "post": {
+                "summary": "sincronizar vendas-balcao",
+                "requestBody": {
+                    "description": "Sync Object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/sync"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "login": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string"
+                },
+                "senha": {
+                    "type": "string"
+                }
+            }
+        },
+        "forgot-password": {
+            "type": "object",
+            "properties": {
+                "codigo": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                }
+            }
+        },
+        "reset-password": {
+            "type": "object",
+            "properties": {
+                "cod_cliente": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "senha": {
+                    "type": "string"
+                }
+            }
+        },
+        "validate": {
+            "type": "object",
+            "properties": {
+                "codigo": {
+                    "type": "string"
+                }
+            }
+        },
+        "sync": {
+            "type": "object",
+            "properties": {
+                "cod_cliente": {
+                    "type": "string"
+                }
+            }
+        },
+        "Cats": {
+            "type": "object",
+            "properties": {
+                "cats": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Cat"
+                    }
+                }
+            }
+        }
+    }
+}

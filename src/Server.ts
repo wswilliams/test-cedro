@@ -10,9 +10,13 @@ import 'express-async-errors';
 import BaseRouter from './routes';
 import logger from '@shared/Logger';
 import { cookieProps } from '@shared/constants';
+import swaggerUi from 'swagger-ui-express';
+// import * as documentSwagger from 'src/daos/MockDb/swagger.json';
+// const documentSwagger = 'src/daos/MockDb/swagger.json';
 
 const app = express();
 const { BAD_REQUEST } = StatusCodes;
+const contextPath = '/api';
 
 
 
@@ -34,8 +38,9 @@ if (process.env.NODE_ENV === 'production') {
     app.use(helmet());
 }
 
+// app.use(`${contextPath}/swagger`, swaggerUi.serve, swaggerUi.setup(documentSwagger));
 // Add APIs
-app.use('/api', BaseRouter);
+app.use(contextPath, BaseRouter);
 
 // Print API errors
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

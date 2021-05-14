@@ -1,36 +1,13 @@
 version: '3.3'
 services: 
 
-  # api-integration-linx:
-  #   build:
-  #     dockerfile: ./deploy/Dockerfile
-  #     context: ${BACKEND_PATH}
-  #   image:  hmt/integration
-  #   container_name: ${API_NAME}
-  #   command: bash -c "npm i && npm start"
-  #   user: root
-  #   environment:
-  #     - TZ=$TZ
-  #     - NODE_ENV=development
-  #   working_dir: /app
-  #   restart: unless-stopped
-  #   ports: 
-  #     - ${BACK_PORT}:${BACK_PORT}
-  #   volumes: 
-  #     - ${BACKEND_PATH}:/app
-  #   depends_on:
-  #     - mongodb
-
-  mongodb:
-    image: mongo:latest
-    container_name: mongodb
+  api-test-cedro:
+    container_name: api-test-cedro
+    image: 'node:12.6-slim'
+    command: bash -c "npm i && npm run start:dev"
+    working_dir: /app
     restart: unless-stopped
-    environment:
-      TZ: $TZ
-      MONGO_INITDB_DATABASE: ${MONGO_DATABASE_DBNAME}
-      MONGODB_DATA_DIR: ${MONGODB_DATA_DIR}
-      MONDODB_LOG_DIR: /dev/null
     ports: 
-      - ${MONGO_PORT}:${MONGO_PORT}
-    volumes:
-      - ./mongo/data:/data/db
+      - 3000:3000
+    volumes: 
+      - ./:/app

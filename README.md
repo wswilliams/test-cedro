@@ -40,4 +40,10 @@ Teste utilizando Postman ou Insomia
 Teste utilizando swagger
     http://localhost:3000/api/swagger
 
+credencias para entrar no systema:
+{
+    "email:"sean.maxwell@gmail.com",
+    "password":"Password@1"
+}
+
 

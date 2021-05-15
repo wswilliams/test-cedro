@@ -1,6 +1,7 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response, Router } from 'express';
 
+import { User } from '@entities/User';
 import UserDao from '@daos/User/UserDao.mock';
 import { paramMissingError, IRequest } from '@shared/constants';
 import { adminMW } from "./middleware";
@@ -18,8 +19,10 @@ const { BAD_REQUEST, CREATED, OK } = StatusCodes;
  *                       Add One - "POST /api/users/add"
  ******************************************************************************/
 
-router.post('/add-user-system', async (req: IRequest, res: Response) => {
-    const { user } = req.body;
+router.post('/add-user-system', async (req: Request, res: Response) => {
+
+    const { name, email, pwdHash } = req.body;
+    const user = new User(name, email, 1, pwdHash);
     if (!user) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
@@ -35,7 +38,9 @@ router.post('/add-user-system', async (req: IRequest, res: Response) => {
 
 router.post('/add-user', async (req: Request, res: Response) => {
 
-    const { user } = req.body;
+    const { nome_completo, data_de_nascimento, cpf, rg } = req.body;
+    const user = new User('', '', 1, '', 0, nome_completo, data_de_nascimento, cpf, rg);
+  
     if (!user) {
         return res.status(BAD_REQUEST).json({
             error: paramMissingError,
@@ -44,8 +49,8 @@ router.post('/add-user', async (req: Request, res: Response) => {
     const jwt = req.signedCookies[cookieProps.key]
     const clientData = await jwtService.decodeJwt(jwt);
     user.id = clientData.id;
-    await userDao.addFile(user);
-    return res.status(CREATED).json({ mensage: "Arquivo criado com sucesso" });
+   const fileDir = await userDao.addFile(user);
+    res.download(fileDir);
 });
 
 

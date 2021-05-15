@@ -1,62 +1,32 @@
 {
-	"id": "452dddca-4bb4-7329-2805-903bbc24bc00",
+	"id": "41915c0f-bc31-0c64-0b04-498742a44a4f",
 	"name": "teste",
-	"description": "Api for initegration between pmz and linx",
+	"description": "Api para adicionar usuários e gerar arquivos no sistema",
 	"order": [],
 	"folders": [
 		{
-			"id": "15b670a2-feb2-3ea7-6f83-aa3feb6ee3b1",
+			"id": "d5e9713d-7acd-1992-bb5d-3b642ab9f957",
 			"name": "test-cedro",
 			"description": "",
 			"order": [
-				"c8e23994-58fd-8461-7e1e-696430c9b326",
-				"8dd95a2b-c8c4-e69f-3c1f-cd7aee9384e0",
-				"50891f3e-8f21-75ba-56ad-cadcb5cc5976"
+				"60073627-561e-42ee-43a7-51bf685e529d",
+				"4c0c2a8a-df75-65a6-063b-34de0187c3b8",
+				"437c68e2-b6cc-1c48-29ce-835fb8b186f4"
 			],
 			"folders_order": [],
-			"owner": "14028000",
-			"collectionId": "452dddca-4bb4-7329-2805-903bbc24bc00"
+			"owner": "2147963",
+			"collectionId": "41915c0f-bc31-0c64-0b04-498742a44a4f"
 		}
 	],
 	"folders_order": [
-		"15b670a2-feb2-3ea7-6f83-aa3feb6ee3b1"
+		"d5e9713d-7acd-1992-bb5d-3b642ab9f957"
 	],
 	"timestamp": 0,
-	"owner": "14028000",
+	"owner": "2147963",
 	"public": false,
 	"requests": [
 		{
-			"id": "50891f3e-8f21-75ba-56ad-cadcb5cc5976",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:3000/api/users/add-user-system",
-			"folder": "15b670a2-feb2-3ea7-6f83-aa3feb6ee3b1",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1621018912624,
-			"name": "gerar file",
-			"description": "",
-			"collectionId": "452dddca-4bb4-7329-2805-903bbc24bc00",
-			"responses": [],
-			"rawModeData": "{\"user\":{\r\n\t\"nome_completo\": \"wssouza4\",\r\n\t\"data_de_nascimento\": \"1981-04-14\",\r\n\t\"cpf\":\"71841121215\",\r\n\t\"rg\":\"71841121215\"\r\n}\r\n}"
-		},
-		{
-			"id": "8dd95a2b-c8c4-e69f-3c1f-cd7aee9384e0",
+			"id": "437c68e2-b6cc-1c48-29ce-835fb8b186f4",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -67,7 +37,7 @@
 				}
 			],
 			"url": "http://localhost:3000/api/users/add-user",
-			"folder": "15b670a2-feb2-3ea7-6f83-aa3feb6ee3b1",
+			"folder": "d5e9713d-7acd-1992-bb5d-3b642ab9f957",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -78,15 +48,45 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1621018864541,
-			"name": "add new users system",
+			"time": 1621111328469,
+			"name": "gerar file",
 			"description": "",
-			"collectionId": "452dddca-4bb4-7329-2805-903bbc24bc00",
+			"collectionId": "41915c0f-bc31-0c64-0b04-498742a44a4f",
 			"responses": [],
-			"rawModeData": "{\"user\":{\r\n\t\"name\": \"wssouza6\",\r\n\t\"email\": \"wssouza6@gmail.com\",\r\n\t\"pwdHash\": \"homega36@\"\r\n}\r\n}"
+			"rawModeData": "{\r\n\t\"nome_completo\": \"wssouza4\",\r\n\t\"data_de_nascimento\": \"1981-04-14\",\r\n\t\"cpf\":\"71841121215\",\r\n\t\"rg\":\"71841121215\"\r\n}"
 		},
 		{
-			"id": "c8e23994-58fd-8461-7e1e-696430c9b326",
+			"id": "4c0c2a8a-df75-65a6-063b-34de0187c3b8",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/api/users/add-user-system",
+			"folder": "d5e9713d-7acd-1992-bb5d-3b642ab9f957",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1621111324292,
+			"name": "add new users system",
+			"description": "",
+			"collectionId": "41915c0f-bc31-0c64-0b04-498742a44a4f",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"wssouza7\",\r\n\t\"email\": \"wssouza7@gmail.com\",\r\n\t\"pwdHash\": \"homega36@\"\r\n}"
+		},
+		{
+			"id": "60073627-561e-42ee-43a7-51bf685e529d",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -97,7 +97,7 @@
 				}
 			],
 			"url": "http://localhost:3000/api/auth/login",
-			"folder": "15b670a2-feb2-3ea7-6f83-aa3feb6ee3b1",
+			"folder": "d5e9713d-7acd-1992-bb5d-3b642ab9f957",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -108,12 +108,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1621018758924,
+			"time": 1621112084993,
 			"name": "login",
 			"description": "",
-			"collectionId": "452dddca-4bb4-7329-2805-903bbc24bc00",
+			"collectionId": "41915c0f-bc31-0c64-0b04-498742a44a4f",
 			"responses": [],
-			"rawModeData": "{\n\"email\":\"wssouza5@gmail.com\",\n\"password\":\"homega36@\"\n}"
+			"rawModeData": "{\n\"email\":\"sean.maxwell@gmail.com\",\n\"password\":\"Password@1\"\n}"
 		}
 	]
 }

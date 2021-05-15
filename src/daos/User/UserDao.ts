@@ -6,7 +6,7 @@ export interface IUserDao {
     getOne: (email: string) => Promise<IUser | null>;
     getOneId: (id: number) => Promise<IUser | null>;
     addUser: (user: IUser) => Promise<void | null>;
-    addFile: (users: IUser) => Promise<void>;
+    addFile: (users: IUser) => Promise<string>;
 }
 
 class UserDao implements IUserDao {
@@ -45,9 +45,9 @@ class UserDao implements IUserDao {
      * @param user
      * @param id
      */
-    public async addFile(user: IUser): Promise<void> {
+    public async addFile(user: IUser): Promise<string> {
         // TODO
-        return Promise.resolve(undefined);
+        return Promise.resolve('');
     }
 
 }

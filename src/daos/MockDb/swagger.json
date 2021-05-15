@@ -138,7 +138,6 @@
         "add-user": {
             "type": "object",
             "properties": {
-                "users": {
                     "nome_completo": {
                         "type": "string"
                     },
@@ -151,7 +150,6 @@
                     "rg": {
                         "type": "string"
                     }
-                }
             }
         }
     }

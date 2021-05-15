@@ -1,4 +1,0 @@
-Dados do Usuário Registrado
-{"nome_completo":"wssouza4","data_de_nascimento":"1981-04-14","cpf":"71841121215","rg":"71841121215","id":130892330060}
-Dados do Usuário Logado
-{"usuario_altenticado":"wssouza5","login":"wssouza5@gmail.com","ip":"172.26.0.2"}

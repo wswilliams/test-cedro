@@ -28,6 +28,11 @@ npm install
 npm rum start:dev
 ```
 
+### Run test
+```
+npm rum test
+```
+
 ### Executar aplicação com Docker
 ```
 docker-compose -f docker-compose.dev.yml up
